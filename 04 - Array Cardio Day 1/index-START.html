@@ -38,17 +38,60 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const born1500 = inventors.filter(inventor => inventor[`year`] >= 1500 && inventor[`year`] <1600);  
+    console.log(`Inventors born in 1500s`);  
+    console.table(born1500)
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    // const firstLastNames = inventors.map(inventor => inventor[`first`] + " " + inventor[`last`]);
+    const firstLastNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    console.log(`-----------------------------------------------------`)
+    console.log(`Full Names`)
+    console.table(firstLastNames)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sortBirth = inventors.sort((firstPerson,secondPerson)=> {
+      if (firstPerson.year > secondPerson.year){
+        return 1;
+      }else{
+        return -1;
+      }
+    })
+    console.log(`-----------------------------------------------------`)
+    console.log(`Inventors sorted by birth date`)
+    console.table(sortBirth);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const allYears = inventors.reduce((total, current) => {
+     return total + (current.passed - current.year)
+    },0);
+    console.log(`-----------------------------------------------------`)
+    console.log(`All years lived by inventors`)
+    console.log(allYears);
 
     // 5. Sort the inventors by years lived
+    const sortLived = inventors.sort((firstPerson,secondPerson)=> {
+      if ((firstPerson.passed - firstPerson.year) > (secondPerson.passed - secondPerson.year)){
+        return 1;
+      }else{
+        return -1;
+      }
+    })
+    console.log(`-----------------------------------------------------`)
+    console.log(`Inventors sorted by years lived`)
+    console.table(sortLived);    
+
+
+    const inventorsYearsLived = inventors.map(inventor => {
+      inventor[`Years Lived`] = inventor.passed - inventor.year;
+      return inventor;
+    })
+    console.log(`-----------------------------------------------------`)
+    console.log(`Inventors with years lived`)
+    console.table(inventorsYearsLived);   
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
