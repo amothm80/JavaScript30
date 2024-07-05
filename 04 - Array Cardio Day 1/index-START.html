@@ -52,13 +52,15 @@
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-    const sortBirth = inventors.sort((firstPerson,secondPerson)=> {
-      if (firstPerson.year > secondPerson.year){
-        return 1;
-      }else{
-        return -1;
-      }
-    })
+    // const sortBirth = inventors.sort((firstPerson,secondPerson)=> {
+    //   if (firstPerson.year > secondPerson.year){
+    //     return 1;
+    //   }else{
+    //     return -1;
+    //   }
+    // })
+
+    const sortBirth = inventors.sort((firstPerson,secondPerson)=> (firstPerson.year > secondPerson.year)?1:-1)
     console.log(`-----------------------------------------------------`)
     console.log(`Inventors sorted by birth date`)
     console.table(sortBirth);
@@ -73,13 +75,14 @@
     console.log(allYears);
 
     // 5. Sort the inventors by years lived
-    const sortLived = inventors.sort((firstPerson,secondPerson)=> {
-      if ((firstPerson.passed - firstPerson.year) > (secondPerson.passed - secondPerson.year)){
-        return 1;
-      }else{
-        return -1;
-      }
-    })
+    // const sortLived = inventors.sort((firstPerson,secondPerson)=> {
+    //   if ((firstPerson.passed - firstPerson.year) > (secondPerson.passed - secondPerson.year)){
+    //     return 1;
+    //   }else{
+    //     return -1;
+    //   }
+    // })
+    const sortLived = inventors.sort((firstPerson,secondPerson)=> (firstPerson.passed - firstPerson.year) > (secondPerson.passed - secondPerson.year)?-1:1); 
     console.log(`-----------------------------------------------------`)
     console.log(`Inventors sorted by years lived`)
     console.table(sortLived);    
@@ -99,10 +102,27 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedPeople = people.sort((firstp,secondp) => {
+      firstparray = firstp.split(",")
+      secondparray = secondp.split(",")
+      return firstparray[0] > secondparray[0] ?1:-1
+    })
+    console.log(`-----------------------------------------------------`)
+    console.log(`Sorted People by last name`)
+    console.table(sortedPeople);   
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const transport = data.reduce(function(obj, item){
+      if (!obj[item]){
+        obj[item] = 0;
+      }
+      obj[item] += 1
+      return obj;
+    },{})
+    console.log(`Summing up instances`)
+    console.log(transport); 
 
   </script>
 </body>
